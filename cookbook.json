@@ -1,73 +1,41 @@
 {
   "name": "Kaltura",
-  "languages": ["node"],
-  "setup": {
-    "questions": [{
-      "question": "Welcome! I just need some information about your Kaltura account to get started",
-      "tip": "You can find your info at http://kmc.kaltura.com/index.php/kmc/kmc4#account|integration",
-      "label": "Welcome",
-      "type": "dialogue"
-    }, {
-      "question": "What is your partner ID?",
-      "tip": "You can find your info at http://kmc.kaltura.com/index.php/kmc/kmc4#account|integration",
-      "name": "partner_id",
-      "label": "Partner ID",
-      "type": "string",
-      "required": true
-    }, {
-      "question": "What is your admin secret?",
-      "tip": "You can find your info at http://kmc.kaltura.com/index.php/kmc/kmc4#account|integration",
-      "name": "admin_secret",
-      "label": "Admin Secret",
-      "type": "string",
-      "required": true
-    }]
-  },
   "recipes": {
-    "likeButton": {
-      "label": "Like Button",
-      "templates": {
-        "client": "like-button",
-        "server": ["like", "unlike", "check-like"]
-      },
+    "setup": {
       "questions": [{
-        "question": "What video should the button apply to?",
-        "label": "Video ID",
+        "question": "Welcome! I just need some information about your Kaltura account to get started",
+        "tip": "You can find your info at http://kmc.kaltura.com/index.php/kmc/kmc4#account|integration",
+        "label": "Welcome",
+        "type": "dialogue"
+      }, {
+        "question": "What is your partner ID?",
+        "tip": "You can find your info at http://kmc.kaltura.com/index.php/kmc/kmc4#account|integration",
+        "name": "partnerID",
+        "label": "Partner ID",
         "type": "string",
-        "name": "videoID",
-        "placeholder": "1_eg2xfvy",
         "required": true
       }, {
-        "include": "videoPlayer",
-        "name": "includeVideoPlayer",
-        "label": "Video Player",
-        "vars": {
-          "includeLikeButton": {"val": false},
-          "videoID": {"inherit": "videoID"}
-        }
-      }, {
-        "question": "Do you want an 'unlike' button?",
-        "label": "Unlike",
-        "type": "boolean",
-        "name": "includeUnlikeButton"
+        "question": "What is your admin secret?",
+        "tip": "You can find your info at http://kmc.kaltura.com/index.php/kmc/kmc4#account|integration",
+        "name": "adminSecret",
+        "label": "Admin Secret",
+        "type": "string",
+        "required": true
       }]
     },
     "videoPlayer": {
       "label": "Video Player",
-      "templates": {
-        "client": "video-player",
-        "server": []
-      },
+      "actions": [],
+      "view": "video-player",
       "questions": [{
         "question": "What video should the player be for?",
         "label": "Video ID",
         "name": "videoID",
-        "type": "string",
-        "userInput": false
+        "type": "string"
       }, {
-        "name": "skin",
         "question": "Which skin would you like to use?",
         "label": "Skin",
+        "name": "skin",
         "type": "enum",
         "values": {
           "KDP3 Dark Skin": "27723522",
@@ -81,28 +49,54 @@
           "Player with no share button": "24666871"
         }
       }, {
-        "name": "includeLikeButton",
         "question": "Want to include a like button?",
         "label": "Like Button",
+        "name": "includeLikeButton",
         "type": "boolean",
         "conditionals": {
           "true": [{
             "include": "likeButton",
             "name": "likeButton",
-            "vars": {
+            "inputs": {
               "videoID": {"inherit": "videoID"},
-              "includeVideoPlayer": {"val": false}
+              "includeVideoPlayer": {"val": true}
             }
           }]
         }
       }]
     },
+    "likeButton": {
+      "label": "Like Button",
+      "actions": ["like", "unlike", "check-like"],
+      "data": "check-like",
+      "view": "like-button",
+      "mainView": "video-player",
+      "questions": [{
+        "question": "What video is the button for?",
+        "label": "Video ID",
+        "type": "string",
+        "name": "videoID",
+        "placeholder": "1_eg2xfvy",
+        "required": true
+      }, {
+        "include": "videoPlayer",
+        "label": "Video Player",
+        "inputs": {
+          "videoID": {"answer": "videoID"},
+          "includeLikeButton": {"val": true}
+        }
+      }, {
+        "question": "Do you want an 'unlike' button?",
+        "label": "Unlike",
+        "type": "boolean",
+        "name": "includeUnlikeButton"
+      }]
+    },
     "mediaList": {
       "label": "Video Search",
-      "templates": {
-        "client": "media-list",
-        "server": "list-media"
-      },
+      "actions": ["list-media"],
+      "data": "list-media",
+      "view": "media-list",
       "questions": [{
         "name": "nameLike",
         "question": "What should the query be?",
@@ -114,7 +108,7 @@
         "include": "videoPlayer",
         "name": "videoPlayer",
         "label": "Video Player",
-        "vars": {
+        "inputs": {
           "videoID": {"serverInput": true}
         }
       }]

@@ -14,8 +14,12 @@
   <span itemprop="width" content="400"></span>
   <span itemprop="height" content="333"></span>
 </div>
-<% if (videoPlayer.includeLikeButton.val) { -%>
-<%-  Lucy.include('like-button') %>
+<% if (answers.includeLikeButton.val) { -%>
+<% console.log('including like') %>
+<%-  Lucy.include('likeButton', {data: {action: "check-like",
+                                        inputs: {videoID: Lucy.result('id')}
+                                       }
+                                }) %>
 <% } -%>
 <%
 var scriptUrl = function(id, partnerId) { 
@@ -23,13 +27,12 @@ var scriptUrl = function(id, partnerId) {
          '/p/' + partnerId +
          '/sp/' + partnerId  + '00' +
          '/embedIframeJs' +
-         '/uiconf_id/' + Lucy.answer('videoPlayer', 'skin') +
+         '/uiconf_id/' + Lucy.answer('skin') +
          '/partner_id/' + partnerId +
          '?autoembed=true&entry_id=' + id +
          '&playerId=kaltura_player_' + id +
          '&width=400&height=333' +
          '&flashvars[streamerType]=auto'
-  console.log('script:' + ret);
   return ret;
 }
 
@@ -45,7 +48,7 @@ app.controller('VideoController', function($scope) {
          '/p/' + video.partnerId +
          '/sp/' + video.partnerId  + '00' +
          '/embedIframeJs' +
-         '/uiconf_id/<%- Lucy.answer('videoPlayer', 'skin') %>' +
+         '/uiconf_id/<%- Lucy.answer('skin') %>' +
          '/partner_id/' + video.partnerId +
          '?autoembed=true&entry_id=' + video.id +
          '&playerId=kaltura_player_' + video.id +
