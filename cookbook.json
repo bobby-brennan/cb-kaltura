@@ -59,7 +59,7 @@
             "name": "likeButton",
             "inputs": {
               "videoID": {"inherit": "videoID"},
-              "includeVideoPlayer": {"val": true}
+              "includeVideoPlayer": {}
             }
           }]
         }
@@ -80,10 +80,11 @@
         "required": true
       }, {
         "include": "videoPlayer",
+        "name": "includeVideoPlayer",
         "label": "Video Player",
         "inputs": {
           "videoID": {"answer": "videoID"},
-          "includeLikeButton": {"val": true}
+          "includeLikeButton": {}
         }
       }, {
         "question": "Do you want an 'unlike' button?",
