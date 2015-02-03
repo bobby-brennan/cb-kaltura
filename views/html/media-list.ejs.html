@@ -3,7 +3,7 @@
 <%- Lucy.form({recipe: 'mediaList', action: 'list-media', tabs: 6}) %>
   </div>
   <div class="col-xs-10 col-xs-offset-1">
-    <h2>Search Results: <%- Lucy.answer('nameLike') %></h2>
+    <h2>Search Results: <%- Lucy.variable('answers.nameLike') %></h2>
     <hr>
     <%- Lucy.for("video in result") %>
       <div class="row">

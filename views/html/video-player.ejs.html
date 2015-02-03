@@ -1,23 +1,23 @@
-<div id="kaltura_player_<%- Lucy.result('id') %>"
+<div id="kaltura_player_<%- Lucy.variable('result.id') %>"
 <% if (Lucy.language.client === 'html-angular') { -%>
      ng-controller="VideoController"
-     ng-init="loadScript(<%- Lucy.result() %>)"
+     ng-init="loadScript(<%- Lucy.variableJS('result.id') %>, <%- Lucy.variableJS('result.partnerId') %>)"
 <% } -%>
      style="width: 400px; height: 333px;"
      itemprop="video" itemscope
      itemtype="http://schema.org/VideoObject">
   <span itemprop="name" content="MediaSpace Categories"></span>
-  <span itemprop="description" content="<%- Lucy.result('description') %>"></span>
-  <span itemprop="duration" content="<%- Lucy.result('duration') %>"></span>
-  <span itemprop="thumbnail" content="<%- Lucy.result('thumbnailUrl') %>">
+  <span itemprop="description" content="<%- Lucy.variable('result.description') %>"></span>
+  <span itemprop="duration" content="<%- Lucy.variable('result.duration') %>"></span>
+  <span itemprop="thumbnail" content="<%- Lucy.variable('result.thumbnailUrl') %>">
   </span>
   <span itemprop="width" content="400"></span>
   <span itemprop="height" content="333"></span>
 </div>
-<% if (answers.includeLikeButton.val) { -%>
+<% if (Lucy.answer('includeLikeButton')) { -%>
 <% console.log('including like') %>
 <%-  Lucy.include('likeButton', {data: {action: "check-like",
-                                        inputs: {videoID: Lucy.result('id')}
+                                        inputs: {videoID: Lucy.variable('result.id')}
                                        }
                                 }) %>
 <% } -%>
@@ -38,20 +38,20 @@ var scriptUrl = function(id, partnerId) {
 
 -%>
 <% if (Lucy.language.client !== 'html-angular') { %>
-<script src="<%- scriptUrl(Lucy.result('id'), Lucy.result('partnerId')) %>">
+<script src="<%- scriptUrl(Lucy.variable('result.id'), Lucy.variable('result.partnerId')) %>">
 </script>
 <% } else { -%>
 <script>
 app.controller('VideoController', function($scope) {
-  $scope.loadScript = function(video) {
+  $scope.loadScript = function(videoID, partnerID) {
     var url = 'http://cdnapi.kaltura.com' +
-         '/p/' + video.partnerId +
-         '/sp/' + video.partnerId  + '00' +
+         '/p/' + partnerID + 
+         '/sp/' + partnerID  + '00' +
          '/embedIframeJs' +
          '/uiconf_id/<%- Lucy.answer('skin') %>' +
-         '/partner_id/' + video.partnerId +
-         '?autoembed=true&entry_id=' + video.id +
-         '&playerId=kaltura_player_' + video.id +
+         '/partner_id/' + partnerID +
+         '?autoembed=true&entry_id=' + videoID +
+         '&playerId=kaltura_player_' + videoID +
          '&width=400&height=333' +
          '&flashvars[streamerType]=auto';
     $.getScript(url);

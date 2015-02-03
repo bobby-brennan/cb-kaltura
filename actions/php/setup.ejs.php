@@ -1,11 +1,11 @@
 require_once('lib/KalturaClient.php');
-$config = new KalturaConfiguration(<%- Lucy.answer('partnerID') %>);
+$config = new KalturaConfiguration(<%- Lucy.variable('answers.partnerID') %>);
 $config->serviceUrl = 'https://www.kaltura.com/';
 $KalturaClient = new KalturaClient($config);
 $KalturaSession = $KalturaClient->session->start(
-    <%- Lucy.answer('adminSecret') %>,
+    <%- Lucy.variable('answers.adminSecret') %>,
     "myUser",
     KalturaSessionType::ADMIN,
-    <%- Lucy.answer('partnerID') %>,
+    <%- Lucy.variable('answers.partnerID') %>,
     null, null);
 $KalturaClient->setKS($KalturaSession);

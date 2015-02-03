@@ -1,18 +1,18 @@
 <%- Lucy.if("result.liked") %>
-<% if (answers.includeUnlikeButton.val) { -%>
-<a <%- Lucy.click("unlike") %>
-   class="btn btn-warning">
-  Unlike
-</a>
+<% if (Lucy.answer('includeUnlikeButton')) { -%>
+  <a <%- Lucy.click("unlike") %>
+     class="btn btn-warning">
+    Unlike
+  </a>
 <% } else { -%>
-<a class="btn btn-success disabled">
-  Liked
-</a>
+  <a class="btn btn-success disabled">
+    Liked
+  </a>
 <% } -%>
 <%- Lucy.fi("result.liked") %>
 <%- Lucy.if("!result.liked") %>
-<a <%- Lucy.click("like") %>
-   class="btn btn-success">
-  Like
-</a>
+  <a <%- Lucy.click("like") %>
+     class="btn btn-success">
+    Like
+  </a>
 <%- Lucy.fi("!result.liked") %>

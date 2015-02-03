@@ -2,9 +2,9 @@ var KalturaConstants = require('./lib/KalturaTypes.js');
 var Kaltura = require('./lib/KalturaClient.js');
 
 var KalturaCreds = {
-  partner_id: <%- Lucy.answer('partnerID') %>,
-  user_id: <%- Lucy.answer('userID') %>,
-  admin_secret: <%- Lucy.answer('adminSecret') %>,
+  partner_id: <%- Lucy.variable('answers.partnerID') %>,
+  user_id: <%- Lucy.variable('answers.userID') %>,
+  admin_secret: <%- Lucy.variable('answers.adminSecret') %>,
 }
 
 var config = new Kaltura.KalturaConfiguration(KalturaCreds.partner_id);
