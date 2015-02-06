@@ -3,24 +3,21 @@
   "recipes": {
     "setup": {
       "questions": [{
-        "question": "Welcome! I just need some information about your Kaltura account to get started",
+        "question": "OK! I just need some information about your Kaltura account to get started",
         "tip": "You can find your info at http://kmc.kaltura.com/index.php/kmc/kmc4#account|integration",
-        "label": "Welcome",
-        "type": "dialogue"
-      }, {
-        "question": "What is your partner ID?",
-        "tip": "You can find your info at http://kmc.kaltura.com/index.php/kmc/kmc4#account|integration",
-        "name": "partnerID",
-        "label": "Partner ID",
-        "type": "string",
-        "required": true
-      }, {
-        "question": "What is your admin secret?",
-        "tip": "You can find your info at http://kmc.kaltura.com/index.php/kmc/kmc4#account|integration",
-        "name": "adminSecret",
-        "label": "Admin Secret",
-        "type": "string",
-        "required": true
+        "label": "API Keys",
+        "type": "form",
+        "inputs": [{
+          "name": "partnerID",
+          "label": "Partner ID",
+          "type": "string",
+          "required": true
+        }, {
+          "name": "adminSecret",
+          "label": "Admin Secret",
+          "type": "string",
+          "required": true
+        }]
       }]
     },
     "videoPlayer": {
@@ -37,17 +34,17 @@
         "label": "Skin",
         "name": "skin",
         "type": "enum",
-        "values": {
-          "KDP3 Dark Skin": "27723522",
-          "KDP3 Blue Skin": "27723532",
-          "KDP3 Light Skin": "27723542",
-          "508 Player": "8704822",
-          "Hovering Controls Player": "24666891",
-          "Player with Captions": "24666901",
-          "Widescreen Player - Light Skin": "24666921",
-          "Widescreen Player": "24666881",
-          "Player with no share button": "24666871"
-        }
+        "choices": [
+          {"label": "KDP3 Dark Skin", "value": "27723522"},
+          {"label": "KDP3 Blue Skin", "value": "27723532"},
+          {"label": "KDP3 Light Skin", "value": "27723542"},
+          {"label": "508 Player", "value": "8704822"},
+          {"label": "Hovering Controls Player", "value": "24666891"},
+          {"label": "Player with Captions", "value": "24666901"},
+          {"label": "Widescreen Player - Light Skin", "value": "24666921"},
+          {"label": "Widescreen Player", "value": "24666881"},
+          {"label": "Player with no share button", "value": "24666871"}
+        ]
       }, {
         "question": "Want to include a like button?",
         "label": "Like Button",
