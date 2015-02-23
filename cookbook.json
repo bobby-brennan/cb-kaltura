@@ -45,21 +45,6 @@
           {"label": "Widescreen Player", "value": "24666881"},
           {"label": "Player with no share button", "value": "24666871"}
         ]
-      }, {
-        "question": "Want to include a like button?",
-        "label": "Like Button",
-        "name": "includeLikeButton",
-        "type": "boolean",
-        "conditionals": {
-          "true": [{
-            "include": "likeButton",
-            "name": "likeButton",
-            "inputs": {
-              "videoID": {"inherit": "videoID"},
-              "includeVideoPlayer": {}
-            }
-          }]
-        }
       }]
     },
     "likeButton": {
@@ -75,13 +60,6 @@
         "name": "videoID",
         "placeholder": "1_eg2xfvy",
         "required": true
-      }, {
-        "include": "videoPlayer",
-        "name": "includeVideoPlayer",
-        "label": "Video Player",
-        "inputs": {
-          "includeLikeButton": {}
-        }
       }, {
         "question": "Do you want an 'unlike' button?",
         "label": "Unlike",
@@ -101,13 +79,6 @@
         "type": "string",
         "required": true,
         "userInput": true
-      }, {
-        "include": "videoPlayer",
-        "name": "videoPlayer",
-        "label": "Video Player",
-        "inputs": {
-          "videoID": {"serverInput": true}
-        }
       }]
     }
   }
